@@ -1,10 +1,14 @@
 package modules
 
 import com.google.inject.{AbstractModule, Provides}
-import com.gu.googleauth.{AntiForgeryChecker, GoogleAuthConfig}
+import com.gu.googleauth.{AntiForgeryChecker, AuthAction, GoogleAuthConfig}
 import com.gu.play.secretrotation.DualSecretTransition.{InitialSecret, TransitioningSecret}
+import controllers.routes
 import play.api.Configuration
 import play.api.http.HttpConfiguration
+import play.api.mvc.AnyContent
+
+import scala.concurrent.ExecutionContext
 
 class GoogleAuthModule extends AbstractModule {
 

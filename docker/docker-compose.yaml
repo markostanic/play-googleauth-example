@@ -1,0 +1,33 @@
+version: "3"
+services:
+  backend_1:
+    container_name: "backend-1"
+    image: "play-googleauth-example:latest"
+    networks:
+      - loadbalancing
+  backend_2:
+    container_name: "backend-2"
+    image: "play-googleauth-example:latest"
+    networks:
+      - loadbalancing
+  backend_3:
+    container_name: "backend-3"
+    image: "play-googleauth-example:latest"
+    networks:
+      - loadbalancing
+  nginx:
+    image: "nginx"
+    ports:
+      - "80:80"
+    networks:
+      - loadbalancing
+    depends_on:
+      - backend_1
+      - backend_2
+      - backend_3
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+
+
+networks:
+  loadbalancing:
